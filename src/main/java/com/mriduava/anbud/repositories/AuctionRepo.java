@@ -20,4 +20,8 @@ public interface AuctionRepo extends JpaRepository<AuctionItem, Long> {
     List<AuctionItem> findAllAuctionPublic();
 
     AuctionItem findAuctionItemById(long id);
+
+
+    @Query(value = "SELECT * FROM auction_items order by start_date DESC", nativeQuery = true)
+    List<AuctionItem> findAllOrderByCreateDate();
 }

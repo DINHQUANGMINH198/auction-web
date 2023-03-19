@@ -24,7 +24,7 @@ public class AuctionService {
     BidRepo bidRepo;
 
     public List<AuctionItem> getAllItems() {
-        return auctionRepo.findAll();
+        return auctionRepo.findAllOrderByCreateDate();
     }
 
     public Optional<AuctionItem> getOneItem(Long id) {
