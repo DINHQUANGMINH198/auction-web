@@ -10,4 +10,7 @@ import java.util.List;
 public interface BidRepo extends JpaRepository<Bid, Long> {
     @Query(value = "SELECT * FROM bids WHERE auction_id = :auctionID", nativeQuery = true)
     List<Bid> findBidsByAuctionId(@Param("auctionID") long auctionID);
+
+    @Query(value = "SELECT max(bid) FROM bids where auction_id = :auctionID", nativeQuery = true)
+    int findMaxBidByAuctionId(@Param("auctionID") int auctionId);
 }

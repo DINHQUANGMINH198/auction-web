@@ -1,5 +1,6 @@
 package com.mriduava.anbud.controllers;
 
+import com.mriduava.anbud.dtos.BuyRequest;
 import com.mriduava.anbud.entities.AuctionItem;
 import com.mriduava.anbud.services.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,10 @@ public class AuctionController {
     @GetMapping("/myauctions/{ownerId}")
     public List<AuctionItem> getByItemOwner(@PathVariable int ownerId) {
         return auctionService.getAuctionByOwner(ownerId);
+    }
+
+    @PostMapping("/buy")
+    public ResponseEntity<Boolean> buyAuction(@RequestBody BuyRequest buyRequest) {
+        return ResponseEntity.ok(auctionService.buyAuction(buyRequest));
     }
 }

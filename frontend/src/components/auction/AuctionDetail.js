@@ -7,7 +7,7 @@ import moment from 'moment'
 
 const AuctionDetail = (props) => {
   const { auctionItem, bids } = useContext(AuctionContext);
-  const { sendBidData } = useContext(SocketContext);
+  const { sendBidData, sendBuyData } = useContext(SocketContext);
   const { user } = useContext(UserContext);
 
   const [newBid, setNewBid] = useState('');
@@ -42,10 +42,33 @@ const AuctionDetail = (props) => {
         auction_id: auctionItem.id,
         bid: +newBid,
         bidder_id: user.id,
-        created_at: Date.now()
+        created_at: Date.now(),
+        bidder: user,
+        auction_item: auctionItem
       }
       sendBidData(data)
       setNewBid('')
+    }
+  }
+
+  const buyNow = (e) => {
+    e.preventDefault();
+    if (user === null) {
+      props.history.push('/user-login')
+    }
+    else if(user.id === auctionItem.owner.id){
+      alert(`You can not buy on your own auction!`)
+    }
+    else {
+      let data = {
+        auction_id: auctionItem.id,
+        bidder_id: user.id,
+        bidder_name: user.name,
+        auction_item_name: auctionItem.item_name
+      }
+      sendBuyData(data)
+      alert(`Buy Success`)
+      props.history.push('/myauction')
     }
   }
 
@@ -80,9 +103,9 @@ const AuctionDetail = (props) => {
             <form onSubmit={e=>postNewBid(e)}>
               <input type="text" className="form-control mt-1" placeholder="Bid price"
                 value={newBid} onChange={e=>setNewBid(e.target.value)}/>
-              <button type="submit" className="btn btn-outline-success btn-sm mt-3 px-5">Place bid</button>
+              <button type="submit" className="btn btn-outline-success btn-sm mt-3 px-5" disabled={auctionItem.winner || auctionItem.buyer}>Place bid</button>
             </form>
-            <button className="btn btn-outline-success btn-sm mt-3 px-5" onClick={() => console.log("alo")}>Buy now with {auctionItem.buy_price}</button>
+            <button className="btn btn-outline-success btn-sm mt-3 px-5" disabled={auctionItem.winner || auctionItem.buyer} onClick={(e) => buyNow(e)}>Buy now with {auctionItem.buy_price}</button>
           </div>
         </Col>
         <Col lg="3" className="rounded border pl-5">
@@ -104,6 +127,14 @@ const AuctionDetail = (props) => {
                 }
               })
             })()}
+            {auctionItem.buyer && <div className="d-flex justify-content-between">
+              <h6 className="text-capitalize text-dark">{auctionItem.buyer}</h6>
+              <h6 className="text-primary">Buy with {auctionItem.buy_price} <span className="text-secondary">VND</span></h6>
+            </div>   }
+            {auctionItem.winner && <div className="d-flex justify-content-between">
+              <h6 className="text-capitalize text-dark">{auctionItem.winner}</h6>
+              <h6 className="text-primary">Win</h6>
+            </div>   }
           </div>
         </Col>
       </Row>

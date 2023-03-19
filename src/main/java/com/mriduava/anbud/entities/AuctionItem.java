@@ -28,6 +28,9 @@ public class AuctionItem {
     private int buy_price;
     private long start_date;
     private long stop_date;
+    private int is_public;
+    private String winner;
+    private String buyer;
     @OneToOne
     @JoinColumn(name = "owner_id", updatable=false, insertable = false)
     private User owner;

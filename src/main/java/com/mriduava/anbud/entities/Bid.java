@@ -17,10 +17,8 @@ public class Bid {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(nullable = true)
     private int auction_id;
     private int bid;
-    @Column(nullable = true)
     private int bidder_id;
     private long created_at;
     @OneToOne

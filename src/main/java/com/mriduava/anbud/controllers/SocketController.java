@@ -1,6 +1,7 @@
 package com.mriduava.anbud.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mriduava.anbud.dtos.BuyRequest;
 import com.mriduava.anbud.dtos.SocketDTO;
 import com.mriduava.anbud.entities.AuctionItem;
 import com.mriduava.anbud.entities.Bid;
@@ -46,6 +47,10 @@ public class SocketController extends TextWebSocketHandler {
                 System.out.println("User connected");
                 break;
             case "user-status":
+                break;
+            case "buy":
+                BuyRequest buyRequest = convertPayload(socketDTO.payload, BuyRequest.class);
+                socketService.buyAuction(buyRequest);
                 break;
             default:
                 System.out.println("Could not read action: " + socketDTO.action);

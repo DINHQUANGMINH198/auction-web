@@ -15,4 +15,9 @@ public interface AuctionRepo extends JpaRepository<AuctionItem, Long> {
 
     @Query(value = "SELECT * FROM auction_items WHERE owner_id = :ownerId", nativeQuery = true)
     List<AuctionItem> findAuctionByOwner(@Param("ownerId") int ownerId);
+
+    @Query(value = "SELECT * FROM auction_items WHERE is_public = 1", nativeQuery = true)
+    List<AuctionItem> findAllAuctionPublic();
+
+    AuctionItem findAuctionItemById(long id);
 }

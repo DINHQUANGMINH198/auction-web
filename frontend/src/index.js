@@ -4,10 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ToastContainer } from 'react-toastify';
 
 ReactDOM.render(
   <React.Fragment>
     <App />
+    <ToastContainer />
   </React.Fragment>,
   document.getElementById('root')
 );

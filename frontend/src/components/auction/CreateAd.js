@@ -22,6 +22,8 @@ const CreateAd = (props) => {
   const [imageUrl, setImageUrl] = useState('')
   const [initialPrice, setInitialPrice] = useState('')
   const [buyPrice, setBuyPrice] = useState('')
+  const [winner, setWinner] = useState('')
+  const [buyer, setBuyer] = useState('')
 
   const [message, setMessage] = useState('')
 
@@ -37,7 +39,9 @@ const CreateAd = (props) => {
       buy_price: buyPrice,
       owner_id: user.id,
       start_date: Date.now(),
-      stop_date: end_date
+      stop_date: end_date,
+      winner: winner,
+      buyer: buyer
     }
 
     await fetch(`/api/auctions`, {

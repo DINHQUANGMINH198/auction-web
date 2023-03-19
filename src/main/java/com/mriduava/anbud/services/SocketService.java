@@ -2,6 +2,7 @@ package com.mriduava.anbud.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mriduava.anbud.dtos.BuyRequest;
 import com.mriduava.anbud.entities.AuctionItem;
 import com.mriduava.anbud.entities.Bid;
 import com.mriduava.anbud.entities.Message;
@@ -74,6 +75,10 @@ public class SocketService {
 
     public void saveNewBid(Bid bid) {
         bidService.postNewBid(bid);
+    }
+
+    public void buyAuction(BuyRequest buyRequest) {
+        auctionService.buyAuction(buyRequest);
     }
 
 }
