@@ -21,6 +21,7 @@ const CreateAd = (props) => {
   const [description, setDescription] = useState('')
   const [imageUrl, setImageUrl] = useState('')
   const [initialPrice, setInitialPrice] = useState('')
+  const [buyPrice, setBuyPrice] = useState('')
 
   const [message, setMessage] = useState('')
 
@@ -33,6 +34,7 @@ const CreateAd = (props) => {
       description,
       item_image: imageUrl,
       initial_price: initialPrice,
+      buy_price: buyPrice,
       owner_id: user.id,
       start_date: Date.now(),
       stop_date: end_date
@@ -79,6 +81,8 @@ const CreateAd = (props) => {
               value={imageUrl} onChange={e=>setImageUrl(e.target.value)}/>
             <input type="text" className="form-control mt-1" placeholder="Initial price"
               value={initialPrice} onChange={e=>setInitialPrice(e.target.value)}/>
+            <input type="text" className="form-control mt-1" placeholder="Buy price"
+                   value={buyPrice} onChange={e=>setBuyPrice(e.target.value)}/>
             <div className="mt-3">
             <span className="mr-5 text-dark">Ends </span>
               <DatePicker className="px-2 py-1 border border-secondary rounded" locale="sv"

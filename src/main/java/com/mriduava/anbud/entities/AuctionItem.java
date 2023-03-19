@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 
 @Entity
@@ -23,6 +24,8 @@ public class AuctionItem {
     private int owner_id;
     private String item_image;
     private int initial_price;
+    @Column(nullable = true)
+    private int buy_price;
     private long start_date;
     private long stop_date;
     @OneToOne

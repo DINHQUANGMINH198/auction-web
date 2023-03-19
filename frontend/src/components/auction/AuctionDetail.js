@@ -80,8 +80,9 @@ const AuctionDetail = (props) => {
             <form onSubmit={e=>postNewBid(e)}>
               <input type="text" className="form-control mt-1" placeholder="Bid price"
                 value={newBid} onChange={e=>setNewBid(e.target.value)}/>
-              <button type="submit" className="btn btn-outline-success btn-sm mt-3 px-5">Place bid</button> 
+              <button type="submit" className="btn btn-outline-success btn-sm mt-3 px-5">Place bid</button>
             </form>
+            <button className="btn btn-outline-success btn-sm mt-3 px-5" onClick={() => console.log("alo")}>Buy now with {auctionItem.buy_price}</button>
           </div>
         </Col>
         <Col lg="3" className="rounded border pl-5">
